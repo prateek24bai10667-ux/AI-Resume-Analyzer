@@ -29,6 +29,7 @@ numpy>=1.26.4
 packaging>=23.1
 pandas>=2.2.2
 pdfminer.six>=20221105
+pdfminer3
 Pillow>=10.0.0
 plotly>=5.18.0
 protobuf>=3.20.3
