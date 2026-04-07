@@ -50,6 +50,7 @@ six>=1.16.0
 smart-open>=6.3.0
 spacy>=3.7.4
 streamlit>=1.30.0
+streamlit-tags
 tenacity>=8.2.3
 tornado>=6.3.3
 tqdm>=4.66.1
