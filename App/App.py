@@ -2,6 +2,9 @@
 
 
 ###### Packages Used ######
+import nltk
+nltk.download('stopwords')
+nltk.download('punkt')
 import streamlit as st # core package used in this project
 import pandas as pd
 import base64, random
