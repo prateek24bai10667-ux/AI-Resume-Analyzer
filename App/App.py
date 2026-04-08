@@ -96,7 +96,7 @@ def course_recommender(course_list):
 
 
 # sql connector
-connection = pymysql.connect(host='localhost',user='root',password='root@MySQL4admin',db='cv')
+connection = pymysql.connect(host='localhost',user='root',password='Ansh&dhruv',db='cv')
 cursor = connection.cursor()
 
 
@@ -135,25 +135,12 @@ st.set_page_config(
 def run():
     
     # (Logo, Heading, Sidebar etc)
-    img = Image.open('./Logo/RESUM.png')
-    st.image(img)
+    #img = Image.open('./Logo/RESUM.png')
+    #st.image(img)
     st.sidebar.markdown("# Choose Something...")
     activities = ["User", "Feedback", "About", "Admin"]
     choice = st.sidebar.selectbox("Choose among the given options:", activities)
-    link = '<b>Built with 🤍 by <a href="https://dnoobnerd.netlify.app/" style="text-decoration: none; color: #021659;">Deepak Padhi</a></b>' 
-    st.sidebar.markdown(link, unsafe_allow_html=True)
     st.sidebar.markdown('''
-        <!-- site visitors -->
-
-        <div id="sfct2xghr8ak6lfqt3kgru233378jya38dy" hidden></div>
-
-        <noscript>
-            <a href="https://www.freecounterstat.com" title="hit counter">
-                <img src="https://counter9.stat.ovh/private/freecounterstat.php?c=t2xghr8ak6lfqt3kgru233378jya38dy" border="0" title="hit counter" alt="hit counter"> -->
-            </a>
-        </noscript>
-    
-        <p>Visitors <img src="https://counter9.stat.ovh/private/freecounterstat.php?c=t2xghr8ak6lfqt3kgru233378jya38dy" title="Free Counter" Alt="web counter" width="60px"  border="0" /></p>
     
     ''', unsafe_allow_html=True)
 
@@ -563,17 +550,17 @@ def run():
                 insert_data(str(sec_token), str(ip_add), (host_name), (dev_user), (os_name_ver), (latlong), (city), (state), (country), (act_name), (act_mail), (act_mob), resume_data['name'], resume_data['email'], str(resume_score), timestamp, str(resume_data['no_of_pages']), reco_field, cand_level, str(resume_data['skills']), str(recommended_skills), str(rec_course), pdf_name)
 
                 ## Recommending Resume Writing Video
-                st.header("**Bonus Video for Resume Writing Tips💡**")
-                resume_vid = random.choice(resume_videos)
-                st.video(resume_vid)
+                ##st.header("**Bonus Video for Resume Writing Tips💡**")
+                ##resume_vid = random.choice(resume_videos)
+                ##st.video(resume_vid)
 
                 ## Recommending Interview Preparation Video
-                st.header("**Bonus Video for Interview Tips💡**")
-                interview_vid = random.choice(interview_videos)
-                st.video(interview_vid)
+                ##st.header("**Bonus Video for Interview Tips💡**")
+                ##interview_vid = random.choice(interview_videos)
+                ##st.video(interview_vid)
 
                 ## On Successful Result 
-                st.balloons()
+                ##st.balloons()
 
             else:
                 st.error('Something went wrong..')                
@@ -633,32 +620,24 @@ def run():
     
     ###### CODE FOR ABOUT PAGE ######
     elif choice == 'About':   
-
-        st.subheader("**About The Tool - AI RESUME ANALYZER**")
-
+        st.subheader("About AI Resume Analyzer 🤖")
+        
         st.markdown('''
+        Welcome to the **AI Resume Analyzer**! 
+        
+        This application is designed to help job seekers, recruiters, and HR professionals streamline the resume screening process. By leveraging the power of Natural Language Processing (NLP), this tool can quickly extract and analyze key information from any PDF resume.
+        
+        **🌟 Key Features:**
+        * **Automated Parsing:** Instantly extracts contact info, education, and skills.
+        * **Skill Analysis:** Evaluates your current skills against industry standards.
+        * **Smart Recommendations:** Suggests missing skills, resume improvements, and relevant courses to help you land your dream job.
+        
+        Whether you are trying to optimize your own resume to beat Applicant Tracking Systems (ATS) or you are a recruiter looking to quickly scan candidates, this tool provides instant, data-driven insights.
+        
+        *Empowering your career journey with Artificial Intelligence!*
+        ''')
 
-        <p align='justify'>
-            A tool which parses information from a resume using natural language processing and finds the keywords, cluster them onto sectors based on their keywords. And lastly show recommendations, predictions, analytics to the applicant based on keyword matching.
-        </p>
-
-        <p align="justify">
-            <b>How to use it: -</b> <br/><br/>
-            <b>User -</b> <br/>
-            In the Side Bar choose yourself as user and fill the required fields and upload your resume in pdf format.<br/>
-            Just sit back and relax our tool will do the magic on it's own.<br/><br/>
-            <b>Feedback -</b> <br/>
-            A place where user can suggest some feedback about the tool.<br/><br/>
-            <b>Admin -</b> <br/>
-            For login use <b>admin</b> as username and <b>admin@resume-analyzer</b> as password.<br/>
-            It will load all the required stuffs and perform analysis.
-        </p><br/><br/>
-
-        <p align="justify">
-            Built with 🤍 by 
-            <a href="https://dnoobnerd.netlify.app/" style="text-decoration: none; color: grey;">Deepak Padhi</a> through 
-            <a href="https://www.linkedin.com/in/mrbriit/" style="text-decoration: none; color: grey;">Dr Bright --(Data Scientist)</a>
-        </p>
+        st.markdown(''''
 
         ''',unsafe_allow_html=True)  
 
