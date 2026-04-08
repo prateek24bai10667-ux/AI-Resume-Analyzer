@@ -104,7 +104,7 @@ if __name__ == '__main__':
         pool.apply_async(
             resume_result_wrapper,
             args=(x,)
-        ) for x in resumes
+        ) for x in resumes 
     ]
 
     results = [p.get() for p in results]
