@@ -250,7 +250,15 @@ def run():
 
                 ## Showing Analyzed data from (resume_data)
                 st.header("**Resume Analysis 🤘**")
-                st.success("Hello "+ resume_data['name'])
+                if resume_data['name'] is not None:
+                    user_name=str(resume_data['name'])
+                else:
+                    user_name="User"    
+                if resume_data['email'] is not None:
+                    user_email = str(resume_data['email'])
+                else:
+                    user_email = "Not Provided"
+                st.success("Hello "+ user_name)
                 st.subheader("**Your Basic info 👀**")
                 try:
                     st.text('Name: '+resume_data['name'])
@@ -309,8 +317,8 @@ def run():
                 text='See our skills recommendation below',value=resume_data['skills'],key = '1  ')
 
                 ### Keywords for Recommendations
-                ds_keyword = ['tensorflow','keras','pytorch','machine learning','deep Learning','flask','streamlit']
-                web_keyword = ['react', 'django', 'node jS', 'react js', 'php', 'laravel', 'magento', 'wordpress','javascript', 'angular js', 'C#', 'Asp.net', 'flask']
+                ds_keyword = ['tensorflow','keras','pytorch','machine learning','deep Learning','flask','streamlit','python','machine learning','deep learning',]
+                web_keyword = ['html', 'css', 'javascript', 'react', 'node js', 'django', 'flask', 'php']
                 android_keyword = ['android','android development','flutter','kotlin','xml','kivy']
                 ios_keyword = ['ios','ios development','swift','cocoa','cocoa touch','xcode']
                 uiux_keyword = ['ux','adobe xd','figma','zeplin','balsamiq','ui','prototyping','wireframes','storyframes','adobe photoshop','photoshop','editing','adobe illustrator','illustrator','adobe after effects','after effects','adobe premier pro','premier pro','adobe indesign','indesign','wireframe','solid','grasp','user research','user experience']
@@ -319,12 +327,16 @@ def run():
                 recommended_skills = []
                 reco_field = ''
                 rec_course = ''
+                if resume_data['skills']:
+                    found_skills = [s.lower() for s in resume_data['skills']]
+                else:
+                    found_skills = []
 
                 ### condition starts to check skills from keywords and predict field
                 for i in resume_data['skills']:
                 
                     #### Data science recommendation
-                    if i.lower() in ds_keyword:
+                    if i in ds_keyword:
                         print(i.lower())
                         reco_field = 'Data Science'
                         st.success("** Our analysis says you are looking for Data Science Jobs.**")
@@ -334,6 +346,9 @@ def run():
                         st.markdown('''<h5 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job</h5>''',unsafe_allow_html=True)
                         # course recommendation
                         rec_course = course_recommender(ds_course)
+                        linkedin_url = f"https://www.linkedin.com/jobs/search/?keywords=Data%20Science"
+                        st.subheader("🚀 Explore Data Science Jobs")
+                        st.markdown(f'''<a href="{linkedin_url}" target="_blank" style="text-decoration: none;"><div style="background-color: #0077b5; color: white; padding: 10px; text-align: center; border-radius: 5px;">View Jobs on LinkedIn</div></a>''', unsafe_allow_html=True)
                         break
 
                     #### Web development recommendation
@@ -347,6 +362,13 @@ def run():
                         st.markdown('''<h5 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h5>''',unsafe_allow_html=True)
                         # course recommendation
                         rec_course = course_recommender(web_course)
+
+                        # --- ADD THIS FOR LINKEDIN ---
+                        linkedin_url = f"https://www.linkedin.com/jobs/search/?keywords=Web%20Development"
+                        st.subheader("🚀 Explore Web Development Jobs")
+                        st.markdown(f'''<a href="{linkedin_url}" target="_blank" style="text-decoration: none;"><div style="background-color: #0077b5; color: white; padding: 10px; text-align: center; border-radius: 5px;">View Jobs on LinkedIn</div></a>''', unsafe_allow_html=True)
+                        # -----------------------------
+
                         break
 
                     #### Android App Development
@@ -400,7 +422,10 @@ def run():
                         # course recommendation
                         rec_course = "Sorry! Not Available for this Field"
                         break
-
+                    if reco_field == '':
+                        reco_field = 'General'
+                        st.info("### Field not specifically detected, but we recommend these top courses:")
+                        st.write("[IBM Data Science Professional Certificate](https://www.coursera.org/professional-certificates/ibm-data-science)")
 
                 ## Resume Scorer & Resume Writing Tips
                 st.subheader("**Resume Tips & Ideas 🥂**")
@@ -533,7 +558,7 @@ def run():
                     my_bar.progress(percent_complete + 1)
 
                 ### Score
-                st.success('** Your Resume Writing Score: ' + str(score)+'**')
+                st.success('** Your Resume Writing Score(ATS): ' + str(score)+'**')
                 st.warning("** Note: This score is calculated based on the content that you have in your Resume. **")
 
                 # print(str(sec_token), str(ip_add), (host_name), (dev_user), (os_name_ver), (latlong), (city), (state), (country), (act_name), (act_mail), (act_mob), resume_data['name'], resume_data['email'], str(resume_score), timestamp, str(resume_data['no_of_pages']), reco_field, cand_level, str(resume_data['skills']), str(recommended_skills), str(rec_course), pdf_name)
@@ -547,7 +572,7 @@ def run():
 
 
                 ## Calling insert_data to add all the data into user_data                
-                insert_data(str(sec_token), str(ip_add), (host_name), (dev_user), (os_name_ver), (latlong), (city), (state), (country), (act_name), (act_mail), (act_mob), resume_data['name'], resume_data['email'], str(resume_score), timestamp, str(resume_data['no_of_pages']), reco_field, cand_level, str(resume_data['skills']), str(recommended_skills), str(rec_course), pdf_name)
+                insert_data(str(sec_token), str(ip_add), (host_name), (dev_user), (os_name_ver), (latlong), (city), (state), (country), (act_name), (act_mail), (act_mob), user_name, user_email, str(resume_score), timestamp, str(resume_data['no_of_pages']), reco_field, cand_level, str(resume_data['skills']), str(recommended_skills), str(rec_course), pdf_name)
 
                 ## Recommending Resume Writing Video
                 ##st.header("**Bonus Video for Resume Writing Tips💡**")
